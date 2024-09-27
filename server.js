@@ -12,6 +12,7 @@ app.use(express.json())
 //app.use() enregistre le middleware pour gérer les requêtes vers /api/contacts,
 // et les route vers le fichier contactRoutes.
 app.use('/api/contacts', require("./routes/contactRoutes"))
+app.use('/api/users', require("./routes/userRoutes"))
 app.use(errorHandler)
 
 app.listen(PORT, ()=>{
