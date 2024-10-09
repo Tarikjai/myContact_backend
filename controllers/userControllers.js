@@ -8,6 +8,7 @@ const User = require('../models/userModel')
 // register a user 
 //@route POST /api/users/register
 //@acces public
+
 const registerUser = asyncHandler(async(req, res)=>{
     const {username, email , password} =  req.body  
     if (!username || !email || !password){
@@ -44,7 +45,7 @@ const registerUser = asyncHandler(async(req, res)=>{
 
 // login a user 
 //@route POST /api/users/register
-//@acces public
+//@access public
 const loginUser = asyncHandler(async(req, res)=>{
     const {email, password} = req.body 
     if (!email || !password){
@@ -62,7 +63,7 @@ const loginUser = asyncHandler(async(req, res)=>{
             }, 
         }, 
             process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: "1m"})
+            {expiresIn: "15m"})
         res.status(200).json({accesToken})
     } else {
         res.status(401);
@@ -73,9 +74,9 @@ const loginUser = asyncHandler(async(req, res)=>{
 
 // current user info
 //@route GET /api/users/current
-//@acces private
-const CurrentUser = asyncHandler(async(req, res)=>{
-    res.json({message : "Current user information"})
+//@access private
+const currentUser = asyncHandler(async(req, res)=>{
+    res.json(req.user)
 } )
 
-module.exports = {registerUser,loginUser , CurrentUser }
+module.exports = {registerUser,loginUser , currentUser }
